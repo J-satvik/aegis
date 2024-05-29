@@ -47,22 +47,31 @@ const Manager = () => {
   };
 
   const savePassword = () => {
-    const newPassword = { ...form, id: uuidv4() };
-    const updatedPasswordArray = [...passwordArray, newPassword];
-    setPasswordArray(updatedPasswordArray);
-    localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
-    setForm({ site: "", username: "", password: "" });
+    if(form.site.length > 3 && form.username.length > 3 && form.password.length >3){
+      const newPassword = { ...form, id: uuidv4() };
+      const updatedPasswordArray = [...passwordArray, newPassword];
+      setPasswordArray(updatedPasswordArray);
+      localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
+      setForm({ site: "", username: "", password: "" });
+    } else {
+      toast("Password not saved :( ");
+    }
   };
 
   const deletePassword = (id) => {
-    const updatedPasswordArray = passwordArray.filter(item => item.id !== id);
-    setPasswordArray(updatedPasswordArray);
-    localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
+    let c = confirm("Really want to delete this password?");
+    if (c) {
+
+      const updatedPasswordArray = passwordArray.filter(item => item.id !== id);
+      setPasswordArray(updatedPasswordArray);
+      localStorage.setItem("passwords", JSON.stringify(updatedPasswordArray));
+    }
   };
 
   const editPassword = (id) => {
     console.log("Editing password with", id);
-    // Add logic to handle password editing
+    setForm(passwordArray.filter(i => i.id === id)[0])
+    setPasswordArray(passwordArray.filter(item => item.id !== id))
   };
 
   const handleChange = (e) => {
@@ -83,17 +92,18 @@ const Manager = () => {
         pauseOnHover
         theme="dark"
         transition="Bounce"
-      />
-      <div className="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
-      <div className="mycontainer">
+        />
+        <ToastContainer/>
+      
+      <div className="mycontainer min-h-[88vh]">
         <h1 className='text-white text-4xl text-center font-bold'>Aegis</h1>
         <p className='text-white text-lg text-center'>Your Password Manager</p>
         <div className="text-white flex flex-col p-4 gap-6 items-center">
-          <input value={form.site} onChange={handleChange} name='site' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Website URI' />
+          <input value={form.site} onChange={handleChange} name='site' id='site' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Website URI' />
           <div className="flex w-full justify-between gap-8">
-            <input value={form.username} onChange={handleChange} name='username' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Username' />
+            <input value={form.username} onChange={handleChange} name='username' id='username' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Username' />
             <div className="relative">
-              <input ref={passwordRef} value={form.password} onChange={handleChange} name='password' type="password" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Password' />
+              <input ref={passwordRef} value={form.password} onChange={handleChange} name='password' id='password' type="password" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Password' />
               <span className='absolute right-[3px] top-[7px] cursor-pointer' onClick={showPassword}>
                 <img ref={ref} src="assets/on.png" alt="on" width={28} className='p-1' />
               </span>
@@ -113,7 +123,7 @@ const Manager = () => {
           <h2 className='font-bold text-2xl py-4'>Your Passwords</h2>
           {passwordArray.length === 0 && <div>No Passwords to show &#58; &#40;</div>}
           {passwordArray.length !== 0 &&
-            <table className="table-auto w-full rounded-md overflow-hidden">
+            <table className="table-auto w-full rounded-md overflow-hidden mb-10">
               <thead className='bg-[#131b2e]'>
                 <tr>
                   <th className='py-2 border-b border-slate-600'>URI</th>
