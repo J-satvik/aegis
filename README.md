@@ -40,8 +40,7 @@ npm run dev
 Bingo! The project is up and running. Add a few passwords and have a look at it appear in the MongoDB database!
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first
-to discuss what you would like to change.
+Pull requests are welcome. Please make sure to update tests as appropriate.
+## License
 
-Please make sure to update tests as appropriate.
-
+[MIT](https://choosealicense.com/licenses/mit/)
