@@ -42,5 +42,4 @@ Bingo! The project is up and running. Add a few passwords and have a look at it 
 
 Pull requests are welcome. Please make sure to update tests as appropriate.
 ## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the [Creative Commons Zero v1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/deed.en) - see the LICENSE file for details.
