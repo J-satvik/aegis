@@ -111,8 +111,8 @@ const Manager = () => {
         <div className="text-white flex flex-col p-4 gap-6 items-center">
           <input value={form.site} onChange={handleChange} name='site' id='site' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Website URI' />
           <div className="flex w-full justify-between gap-8">
-            <input value={form.username} onChange={handleChange} name='username' id='username' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Username' />
-            <div className="relative">
+            <input value={form.username} onChange={handleChange} name='username' id='username' type="text" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-1/2' placeholder='Enter Username' />
+            <div className="relative w-1/2">
               <input ref={passwordRef} value={form.password} onChange={handleChange} name='password' id='password' type="password" className='rounded-lg border-2 border-solid border-blue-800 text-black p-4 py-1.5 w-full' placeholder='Enter Password' />
               <span className='absolute right-[3px] top-[7px] cursor-pointer' onClick={showPassword}>
                 <img ref={ref} src="assets/on.png" alt="on" width={28} className='p-1' />
